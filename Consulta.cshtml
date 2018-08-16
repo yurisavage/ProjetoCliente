@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "Consulta";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h3>Consulta de Clientes</h3>
+<a href="/Cliente/Cadastro">Ir para o Cadastro.</a>
+<hr/>
+
+@model Projeto.Web.Models.ClienteViewModelConsulta
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Nome) <br/>
+    @Html.TextBoxFor(model => model.Nome)
+    <span class="text-danger">
+        @Html.ValidationMessageFor(model => model.Nome)
+    </span>
+
+    <br/><br/>
+
+    <input type="submit" value="Pesquisar Clientes" class="btn btn-success" />
+    <br/><br/>
+
+    @ViewBag.Mensagem
+
+    <br /><br />
+
+    if (ViewBag.Dados != null)
+    {
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome do Cliente</th>
+                    <th>Endereço de Email</th>
+                    <th>Data de Cadastro</th>
+                    <th>Operações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach(var c in ViewBag.Dados)
+                {
+                    <tr>
+                        <td>@c.IdCliente</td>
+                        <td>@c.Nome</td>
+                        <td>@c.Email</td>
+                        <td>@c.DataCadastro</td>
+                        <td>
+
+                            @Html.ActionLink("Visualizar", "Visualizacao",
+                                    new { id = c.IdCliente},
+                                    new { @class = "btn btn-warning btn-sm" })
+
+                            @Html.ActionLink("Editar", "Edicao",
+                                   new { id = c.IdCliente },
+                                   new { @class = "btn btn-primary btn-sm" })
+
+
+                            @Html.ActionLink("Excluir", "Exclusao",
+                                    new { id = c.IdCliente},
+                                    new { @class = "btn btn-danger btn-sm",
+                                          @onclick = "return confirm('Deseja excluir este cliente?');"})
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                        Quantidade de Clientes: @ViewBag.Dados.Count
+                    </td>
+
+                    <td>
+                        <a href="#" class="btn btn-success btn-sm">
+                            Gerar Relatório
+                        </a>
+                    </td>
+                </tr>
+            </tfoot>
+
+
+        </table>
+    }
+
+
+}
+
+
+
+
+
+
+

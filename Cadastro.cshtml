@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Cadastro";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h3>Cadastro de Clientes</h3>
+<a href="/Cliente/Consulta">Ir para a Consulta.</a>
+<hr />
+
+@model Projeto.Web.Models.ClienteViewModelCadastro
+
+@using (Html.BeginForm())
+{
+    <div class="text-danger">
+        @Html.ValidationSummary()
+    </div>
+
+        @Html.LabelFor(model => model.Nome) <br/>
+        @Html.TextBoxFor(model => model.Nome)
+        <br/><br/>
+
+        @Html.LabelFor(model => model.Email) <br/>
+        @Html.TextBoxFor(model => model.Email)
+        <br/><br/>
+
+        <input type="submit" value="Cadastrar Cliente" class="btn btn-success" />
+        <br /><br />
+
+        @ViewBag.Mensagem
+}
+
+
+
+

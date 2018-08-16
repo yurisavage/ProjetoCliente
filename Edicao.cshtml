@@ -1,0 +1,43 @@
+﻿
+@{
+    /**/
+
+    ViewBag.Title = "Edicao";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h3>Editar Dados do Cliente</h3>
+<a href="/Cliente/Consulta">Voltar</a> para a página de consulta.
+<hr />
+
+<p>
+    Para alterar os dados do cliente, utilize o formulário abaixo:
+</p>
+
+
+@model Projeto.Web.Models.ClienteViewModelEdicao
+
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.IdCliente) <br />
+    @Html.TextBoxFor(model => model.IdCliente,
+              new { @readonly = "readonly" })
+
+    <br /><br />
+
+    @Html.LabelFor(model => model.Nome) <br />
+    @Html.TextBoxFor(model => model.Nome)
+    <br /><br />
+
+    @Html.LabelFor(model => model.Email) <br />
+    @Html.TextBoxFor(model => model.Email)
+    <br /><br />
+
+    <input type="submit" value="Atualizar Dados" class="btn btn-primary btn-sm" />
+    <br /><br />
+
+    @ViewBag.Mensagem
+}
+
+
